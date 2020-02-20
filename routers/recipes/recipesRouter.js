@@ -11,4 +11,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id/shoppinglist", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const list = await Rec.getShoppingList(id);
+
+    if (list.length !== 0) {
+      res.status(200).json(list);
+    } else {
+      res.status(404).json({ errorMessage: "Invalid ID" });
+    }
+  } catch (err) {
+    res.status(500).json({ errorMessage: err.message });
+  }
+});
+
 module.exports = router;
