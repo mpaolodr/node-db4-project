@@ -18,7 +18,25 @@ function getShoppingList(id) {
     });
 }
 
+function getInstructions(id) {
+  return db("recipes")
+    .where({ id })
+    .first()
+    .then(recipe => {
+      return db("steps as s")
+        .join("recipes as r", "s.recipe_id", "r.id")
+        .select(
+          "r.name as Recipe Name",
+          "s.step_number as Step Number",
+          "s.description as Description"
+        )
+        .where({ "s.recipe_id": id })
+        .orderBy("s.step_number", "asc");
+    });
+}
+
 module.exports = {
   getRecipes,
-  getShoppingList
+  getShoppingList,
+  getInstructions
 };
