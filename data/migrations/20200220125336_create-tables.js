@@ -37,6 +37,7 @@ exports.up = function(knex) {
 
       //   recipe_ingredients
       .createTable("recipe_ingredients", col => {
+        col.primary(["recipe_id", "ingredient_id"]);
         col
           .integer("recipe_id")
           .notNullable()
