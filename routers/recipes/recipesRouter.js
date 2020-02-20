@@ -20,7 +20,7 @@ router.get("/:id/shoppinglist", async (req, res) => {
     if (list.length !== 0) {
       res.status(200).json(list);
     } else {
-      res.status(404).json({ errorMessage: "Invalid ID" });
+      res.status(404).json({ errorMessage: "Recipe not found" });
     }
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
@@ -36,7 +36,7 @@ router.get("/:id/instructions", async (req, res) => {
     if (instructions.length !== 0) {
       res.status(200).json(instructions);
     } else {
-      res.status(404).json({ errorMessage: "Invalid ID" });
+      res.status(404).json({ errorMessage: "Recipe not found" });
     }
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
